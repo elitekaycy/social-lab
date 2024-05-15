@@ -40,3 +40,16 @@
     }
 }j
 ```
+
+#### Lab 3: Monitor Application Health with Actuator Endpoints
+
+#### Scenario: You're deploying your Spring Boot application to a production environment. It's crucial to monitor its health and performance.
+
+### Tasks:
+
+- Enable Spring Boot Actuator in your application.
+- Explore Actuator endpoints like /health, /metrics, and /env.
+- Visualize application health metrics using a monitoring tool (e.g., Grafana, Prometheus).
+- Secure access to Actuator endpoints using basic authentication or other security measures.
+
+- [grafana dashboard json](./extra/12900_rev3.json)

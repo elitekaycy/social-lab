@@ -2,6 +2,7 @@ package com.oauth.socialjwt.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -43,6 +44,7 @@ public class SecurityConfig {
         .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(oauth -> {
           oauth.requestMatchers("/auth/**").permitAll();
+          oauth.requestMatchers("/actuator/**").permitAll();
           oauth.anyRequest().authenticated();
         })
         .oauth2ResourceServer(oauth -> oauth.jwt(Customizer.withDefaults()))
