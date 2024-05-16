@@ -8,3 +8,8 @@
 
 
 [Lab 3: Monitor Application Health with Actuator Enpoint](./social-jwt)
+
+
+[Lab 4 & Lab 5: Build a Microservice-based E-commerce Application &  Containerize Your Microservices for Deployment](./micro-ecommerce)
+
+
