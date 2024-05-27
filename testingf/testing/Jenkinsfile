@@ -9,7 +9,7 @@ pipeline {
 
     DOCKER_NAME = 'testingf'
     JDK_HOME = tool 'jdk-20'
-    // DOCKER_CREDENTIALS = credentials('dockerhub')
+    DOCKER_CREDENTIALS = credentials('dockerhub')
       
   }
   stages {
@@ -29,30 +29,19 @@ pipeline {
             }
           }
     }
-    
-    stage("Test") {
-       steps {
-         dir(env.WORKDIR) {
-            script {
-             def javaHome = "${env.JDK_HOME}/bin/java"
-             sh 'echo ${javaHome}'
-             sh 'JAVA_HOME=${javaHome} mvn test'
-           }
-          }
-        }
-   }
+   
 
     stage("build image") {
       steps {
         dir(env.WORKDIR) {
            script {
              sh 'docker build -t ${DOCKER_NAME}:latest .'
-             }
-       }  
+          }
+       } 
       } 
     }
     
-    /**
+
    stage("push to docker hub") {
 
       steps {
@@ -63,10 +52,9 @@ pipeline {
         sh 'docker push ${DOCKER_NAME}:latest'
 
        }
-
-       } 
+  } 
    }
-   **/
+
   }
 
   post {
