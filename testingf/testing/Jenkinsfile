@@ -30,8 +30,9 @@ pipeline {
     
     stage("Test") {
        steps {
-         dir(env.WORKDIR)
-          sh 'mvn test'
+         dir(env.WORKDIR) {
+           sh 'mvn test'
+          }
         }
    }
 
