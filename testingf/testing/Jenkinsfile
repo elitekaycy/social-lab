@@ -1,10 +1,9 @@
 pipeline {
-   agent {
-       docker {
-           image 'maven:3.9.5-eclipse-temurin'
-           args '-v /root/.m2:/root/.m2'
-        }
+   agent any
+   tools {
+      maven '3.9.5'
     }
+       
    environment {
 
     DOCKER_NAME = 'testingf'
