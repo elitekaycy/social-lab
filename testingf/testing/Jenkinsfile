@@ -20,10 +20,12 @@ pipeline {
     }
 
     stage("CD WORKDIR") { 
-        dir('testingf/testing') {
-            script {
-                  env.WORKDIR = pwd()
-              }
+        steps {
+            dir('testingf/testing') {
+              script {
+                    env.WORKDIR = pwd()
+                }
+            }
           }
     }
     
