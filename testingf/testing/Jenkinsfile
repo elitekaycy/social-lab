@@ -8,6 +8,8 @@ pipeline {
    environment {
 
     DOCKER_NAME = 'testingf'
+    JAVA_HOME = '/var/jenkins_home/tools/hudson.model.JDK/jdk-20/jdk20'
+    PATH= "${JAVA_HOME}/bin:${env.PATH}"
     // DOCKER_CREDENTIALS = credentials('dockerhub')
       
   }
