@@ -1,0 +1,59 @@
+pipeline {
+   agent {
+       docker {
+           image 'maven:3.9.5-eclipse-temurin'
+           args '-v /root/.m2:/root/.m2'
+        }
+    }
+   environment {
+
+    DOCKER_NAME = 'testingf'
+    DOCKER_CREDENTIALS = credentials('dockerhub')
+      
+  }
+  stages {
+
+    stage("clone Repository") {
+      steps {
+          checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/elitekaycy/social-lab']])
+       }
+    }
+
+    stage("CD WORKDIR") { 
+        dir('testingf/testing') {
+            script {
+                  env.WORKDIR = pwd()
+              }
+          }
+    }
+    
+    stage("Test") {
+       steps {
+          sh 'mvn test'
+        }
+   }
+
+    stage("build image") {
+      steps {
+         sh 'docker build -t ${DOCKER_NAME}:latest .'
+      } 
+    }
+    
+   stage("push to docker hub") {
+    
+      steps {
+        
+        sh 'echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin'               
+        sh 'docker push ${DOCKER_NAME}:latest'
+
+       } 
+   }
+  }
+
+  post {
+        always {
+            sh 'docker logout'
+            cleanWs()
+        }
+    }
+}
