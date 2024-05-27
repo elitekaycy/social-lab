@@ -30,13 +30,18 @@ pipeline {
     
     stage("Test") {
        steps {
+         dir(env.WORKDIR)
           sh 'mvn test'
         }
    }
 
     stage("build image") {
       steps {
-         sh 'docker build -t ${DOCKER_NAME}:latest .'
+        dir(env.WORKDIR) {
+           script {
+             sh 'docker build -t ${DOCKER_NAME}:latest .'
+             }
+       }  
       } 
     }
     
@@ -44,9 +49,13 @@ pipeline {
     
       steps {
         
+        script {
+
         sh 'echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin'               
         sh 'docker push ${DOCKER_NAME}:latest'
 
+       }
+      
        } 
    }
   }
