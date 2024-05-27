@@ -9,7 +9,6 @@ pipeline {
 
     DOCKER_NAME = 'testingf'
     JDK_HOME = tool 'jdk-20'
-    JAVA_HOME = "${JDK_HOME}/bin/java"
     // DOCKER_CREDENTIALS = credentials('dockerhub')
       
   }
@@ -34,8 +33,11 @@ pipeline {
     stage("Test") {
        steps {
          dir(env.WORKDIR) {
-           sh 'echo ${JAVA_HOME}'
-           sh 'mvn test'
+            script {
+             def javaHome = "${env.JDK_HOME}/bin/java"
+             sh 'echo ${javaHome}'
+             sh 'JAVA_HOME=${javaHome} mvn test'
+           }
           }
         }
    }
