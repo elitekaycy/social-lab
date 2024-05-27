@@ -48,8 +48,11 @@ pipeline {
 
         script {
 
-        sh 'echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin'               
-        sh 'docker push ${DOCKER_NAME}:latest'
+           withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pwd', usernameVariable: 'username')]) {
+                 sh "echo ${pwd} | docker login -u ${username} --password-stdin"
+           }
+           sh "docker push ${DOCKER_NAME}:latest"
+
 
        }
   } 
