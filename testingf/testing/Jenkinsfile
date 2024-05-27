@@ -51,8 +51,8 @@ pipeline {
 
            withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pwd', usernameVariable: 'username')]) {
                  sh "echo ${pwd} | docker login -u ${username} --password-stdin"
+                 sh "docker push ${DOCKER_NAME}:latest"
            }
-           sh "docker push ${DOCKER_NAME}:latest"
 
 
        }
