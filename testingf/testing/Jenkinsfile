@@ -1,16 +1,14 @@
 pipeline {
-   agent { any }
+   agent any
    tools {
       maven '3.9.5'
       jdk 'jdk-20'
     }
-       
    environment {
 
     DOCKER_NAME = 'testingf'
     JDK_HOME = tool 'jdk-20'
     DOCKER_CREDENTIALS = credentials('dockerhub')
-      
   }
   stages {
 
