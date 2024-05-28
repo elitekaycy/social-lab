@@ -35,7 +35,7 @@ pipeline {
       steps {
         dir(env.WORKDIR) {
            script {
-             sh 'docker build -t ${DOCKER_NAME}:latest .'
+             sh 'docker build -t elitekaycy/${DOCKER_NAME}:latest .'
           }
        } 
       } 
@@ -50,8 +50,8 @@ pipeline {
         script {
 
            withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pwd', usernameVariable: 'username')]) {
-                 sh "echo $pwd | docker login -u $username --password-stdin"
-                 sh "docker push ${DOCKER_NAME}:latest"
+                 sh "echo ${pwd} | docker login -u ${username} --password-stdin"
+                 sh "docker push elitekaycy/${DOCKER_NAME}:latest"
            }
 
 
