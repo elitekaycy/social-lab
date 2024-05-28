@@ -23,7 +23,6 @@ pipeline {
             dir('testingf/testing') {
               script {
                     env.WORKDIR = pwd()
-                    sh  'echo ${env.WORKDIR}'
                 }
             }
           }
@@ -44,7 +43,6 @@ pipeline {
    stage("push to docker hub") {
 
       steps {
-        dir(env.WORKDIR) {
            
         script {
 
@@ -52,9 +50,6 @@ pipeline {
                  sh "echo ${pwd} | docker login -u ${username} --password-stdin"
                  sh "docker push elitekaycy/${DOCKER_NAME}:latest"
            }
-
-
-       }
         }
   } 
    }
