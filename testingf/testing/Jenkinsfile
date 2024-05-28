@@ -1,5 +1,8 @@
 pipeline {
-   agent any
+   agent {
+       image 'docker:26.0.1'
+       args '-v /var/run/docker.sock:/var/run/docker.sock' 
+    }
    tools {
       maven '3.9.5'
       jdk 'jdk-20'
