@@ -1,6 +1,8 @@
 - updates - [added docker]('./testing/Dockerfile')
 - updates - [added Jenkins pipeline]('./testing/Jenkinsfile')
 
+![jenkins-pipeline png]('./testing/docs/pipeline.PNG')
+
 # Automated Testing with Selenium and JUnit
 
 ## Overview
