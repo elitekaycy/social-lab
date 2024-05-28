@@ -23,6 +23,7 @@ pipeline {
             dir('testingf/testing') {
               script {
                     env.WORKDIR = pwd()
+                    sh  'echo ${env.WORKDIR}'
                 }
             }
           }
